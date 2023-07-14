@@ -1,0 +1,13 @@
+Python Virtual Environment 
+
+Create 
+
+Activate 
+
+Deactivate
+
+
+
+
+requirements.txt: list of packages + versions to run the project 
+- pygame 
