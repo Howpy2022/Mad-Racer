@@ -1,12 +1,19 @@
 Python Virtual Environment 
 
-Create 
+Create (a virtual environment called env in current directory)
+python3 -m venv env 
 
 Activate 
+source env/bin/activate
+
+Installing packages
+pip install pygame 
+
+Installing packages from requirements.txt
+pip install -r requirements.txt
 
 Deactivate
-
-
+deactivate 
 
 
 requirements.txt: list of packages + versions to run the project 
