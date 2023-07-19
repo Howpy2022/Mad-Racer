@@ -70,6 +70,8 @@ def myFunction():
 customButton = Button(280, 360, 80, 50, 'Play', myFunction)
 customButton = Button(480, 10, 150, 50, 'Settings', myFunction, True)
 
+title_font = pygame.font.SysFont('Arial', 60 )
+
 # Game loop.
 while True:
     screen.fill((20, 20, 20))
@@ -80,6 +82,11 @@ while True:
 
     for object in objects:
         object.process()
+
+    title_rect = pygame.Rect(120, 80, 360, 60)
+    title_surf = title_font.render("Mad Racer", True, (255, 255, 255))
+
+    screen.blit(title_surf, title_rect)
 
     pygame.display.flip()
     fpsClock.tick(fps)
