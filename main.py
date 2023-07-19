@@ -67,8 +67,8 @@ class Button():
 def myFunction():
     print('Button Pressed')
 
-customButton = Button(30, 30, 400, 100, 'Play', myFunction)
-customButton = Button(30, 140, 400, 100, 'Settings', myFunction, True)
+customButton = Button(280, 360, 80, 50, 'Play', myFunction)
+customButton = Button(480, 10, 150, 50, 'Settings', myFunction, True)
 
 # Game loop.
 while True:
