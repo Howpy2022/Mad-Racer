@@ -29,8 +29,9 @@ class Entity:
         pass 
     
     def draw(self):
-        # Draw entity on screen
-        pass 
+        # Draw entity on screen (if surface is not None)
+        if self.surface:
+            self.config.screen.blit(self.surface, self.shape)
 
     def collide(self, other):
         # Return true if entity collides with other entity
