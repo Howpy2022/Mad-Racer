@@ -1,92 +1,154 @@
-import pygame
 import sys
 
+import pygame
 
-# initializing the constructor
+
+# Configuration
 pygame.init()
-# screen resolution
-res = (720,720)
-# opens up a window
-screen = pygame.display.set_mode(res)
+fps = 60
+fpsClock = pygame.time.Clock()
+width, height = 640, 480
+screen = pygame.display.set_mode((width, height))
 
-# white color
-color = (255,255,255)
-# light shade of the button
-color_light = (170,170,170)
-# dark shade of the button
-color_dark = (100,100,100)
+font = pygame.font.SysFont('Arial', 40)
 
-# stores the width of the
-# screen into a variable
-width = screen.get_width()
-# stores the height of the
-# screen into a variable
-height = screen.get_height()
-
-# defining a font
-smallfont = pygame.font.SysFont('Corbel',35)
-
-# rendering a text written in
-# this font
-text = smallfont.render('quit' , True , color)
-
+# global list of button objects
+objects = []
+start_objects = [] 
 
 screen_mode = "start" # start, menu, settings, map_sketch, lobby, map_select, game, game_over
 
 
+class Button():
+    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, onePress=False, screen_mode=""):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.onclickFunction = onclickFunction
+        self.onePress = onePress
+
+        self.fillColors = {
+            'normal': '#ffffff',
+            'hover': '#666666',
+            'pressed': '#333333',
+        }
+
+        # overall button surface (i.e. background)
+        self.buttonSurface = pygame.Surface((self.width, self.height))
+        # overall button rectangle 
+        self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
+        
+        # button text surface 
+        self.buttonSurf = font.render(buttonText, True, (20, 20, 20))
+        # whether button is pressed
+        self.alreadyPressed = False
+
+        self.screen_mode = screen_mode
+        
+        objects.append(self)
+
+    def process(self):
+        # TODO: add pos argument (for position of mouse or etc)
+        # process button 
+        mousePos = pygame.mouse.get_pos()
+        
+        self.buttonSurface.fill(self.fillColors['normal'])
+        if self.buttonRect.collidepoint(mousePos):
+            self.buttonSurface.fill(self.fillColors['hover'])
+
+            if pygame.mouse.get_pressed(num_buttons=3)[0]:
+                self.buttonSurface.fill(self.fillColors['pressed'])
+
+                if self.onePress:
+                    self.onclickFunction()
+
+                elif not self.alreadyPressed:
+                    self.onclickFunction()
+                    self.alreadyPressed = True
+
+            else:
+                self.alreadyPressed = False
+
+        self.buttonSurface.blit(self.buttonSurf, [
+            self.buttonRect.width/2 - self.buttonSurf.get_rect().width/2,
+            self.buttonRect.height/2 - self.buttonSurf.get_rect().height/2
+        ])
+        screen.blit(self.buttonSurface, self.buttonRect)
+
+def myFunction():
+    print('Button Pressed')
+
+def handleToSettings():
+    global screen_mode
+    screen_mode = "settings"
+
+def handleToMenu():
+    global screen_mode
+    screen_mode = "menu"
+
+def handleToStart():
+    global screen_mode
+    screen_mode = "start"            
+
 def start_screen():
     # Handle start screen
     if screen_mode == "start":
-        mouse = pygame.mouse.get_pos()
-
-        # handle start screen
-        for ev in pygame.event.get():
-            
-            if ev.type == pygame.QUIT:
+        screen.fill((20, 20, 20))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 pygame.quit()
-                
-            #checks if a mouse is clicked
-            if ev.type == pygame.MOUSEBUTTONDOWN:
-                
-                #if the mouse is clicked on the
-                # button the game is terminated
-                if width/2 <= mouse[0] <= width/2+140 and height/2 <= mouse[1] <= height/2+40:
-                    pygame.quit()
-                    
-        # fills the screen with a color
-        screen.fill((60,25,60))
-        
-        # stores the (x,y) coordinates into
-        # the variable as a tuple
-        # mouse = pygame.mouse.get_pos()
-        
-        # if mouse is hovered on a button it
-        # changes to lighter shade 
-        if width/2 <= mouse[0] <= width/2+140 and height/2 <= mouse[1] <= height/2+40:
-            pygame.draw.rect(screen,color_light,[width/2,height/2,140,40])
-            
-        else:
-            pygame.draw.rect(screen,color_dark,[width/2,height/2,140,40])
-        
-        # superimposing the text onto our button
-        screen.blit(text , (width/2+50,height/2))
-        
-        # updates the frames of the game
-        pygame.display.update()
-            
+                sys.exit()
 
+        for object in objects:
+            if object.screen_mode == "start":
+                object.process()
+
+        pygame.display.flip()
+        fpsClock.tick(60)
+            
 
 def menu_screen():
     # Handle menu screen
     if screen_mode == "menu":
-        pass 
+        screen.fill((20, 20, 20))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        for object in objects:
+            if object.screen_mode == "menu":
+                object.process()
+
+        pygame.display.flip()
+        fpsClock.tick(60)
     
 def settings_screen():
     # Handle setting screen
     if screen_mode == "settings":
-        pass 
-    
-    
+        screen.fill((20, 20, 20))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        for object in objects:
+            if object.screen_mode == "settings":
+                object.process()
+
+        pygame.display.flip()
+        fpsClock.tick(60)
+
+
+customButton = Button(30, 30, 400, 100, 'Play', handleToMenu, True, "start")
+customButton = Button(30, 140, 400, 100, 'Settings', handleToSettings, True, "start")
+
+customButton = Button(30, 30, 400, 100, 'Close', handleToStart, True, "menu")
+customButton = Button(30, 140, 400, 100, 'Host', myFunction, True, "menu")
+customButton = Button(30, 250, 400, 100, 'Join', myFunction, True, "menu")
+
+customButton = Button(30, 30, 400, 100, 'Close', handleToStart, True, "settings")
 
 # Game loop 
 while True:
@@ -94,7 +156,7 @@ while True:
 	
 	
     # DISPLAY 
-    
+            
     start_screen()
     menu_screen()
     settings_screen()
