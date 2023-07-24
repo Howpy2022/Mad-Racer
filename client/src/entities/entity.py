@@ -26,7 +26,7 @@ class Entity:
         
     def process(self):
         # Process entity in 1 game tick 
-        pass 
+        self.draw()
     
     def draw(self):
         # Draw entity on screen (if surface is not None)
@@ -35,4 +35,6 @@ class Entity:
 
     def collide(self, other):
         # Return true if entity collides with other entity
+        # TODO: handle different types of collision here 
         pass 
+    
