@@ -99,7 +99,11 @@ def start_screen():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
+        
+        # draw title text 
+        titleText = font.render('Mad Racer', True, (255, 255, 255))
+        screen.blit(titleText, (30, 30))
+        
         for object in objects:
             if object.screen_mode == "start":
                 object.process()
@@ -133,6 +137,10 @@ def settings_screen():
                 pygame.quit()
                 sys.exit()
 
+        # draw settings text 
+        settingsText = font.render('Settings', True, (255, 255, 255))
+        screen.blit(settingsText, (30, 30))
+        
         for object in objects:
             if object.screen_mode == "settings":
                 object.process()
@@ -141,14 +149,14 @@ def settings_screen():
         fpsClock.tick(60)
 
 
-customButton = Button(30, 30, 400, 100, 'Play', handleToMenu, True, "start")
-customButton = Button(30, 140, 400, 100, 'Settings', handleToSettings, True, "start")
+customButton = Button(30, 100, 400, 100, 'Play', handleToMenu, False, "start")
+customButton = Button(30, 210, 400, 100, 'Settings', handleToSettings, False, "start")
 
-customButton = Button(30, 30, 400, 100, 'Close', handleToStart, True, "menu")
-customButton = Button(30, 140, 400, 100, 'Host', myFunction, True, "menu")
-customButton = Button(30, 250, 400, 100, 'Join', myFunction, True, "menu")
+customButton = Button(30, 30, 400, 100, 'Close', handleToStart, False, "menu")
+customButton = Button(30, 140, 400, 100, 'Host', myFunction, False, "menu")
+customButton = Button(30, 250, 400, 100, 'Join', myFunction, False, "menu")
 
-customButton = Button(30, 30, 400, 100, 'Close', handleToStart, True, "settings")
+customButton = Button(30, 100, 400, 100, 'Close', handleToStart, False, "settings")
 
 # Game loop 
 while True:
