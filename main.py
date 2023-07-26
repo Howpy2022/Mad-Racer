@@ -94,7 +94,7 @@ def handleToStart():
 def start_screen():
     # Handle start screen
     if screen_mode == "start":
-        screen.fill((20, 20, 20))
+        screen.fill((255, 51, 51))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -102,7 +102,7 @@ def start_screen():
         
         # draw title text 
         titleText = font.render('Mad Racer', True, (255, 255, 255))
-        screen.blit(titleText, (30, 30))
+        screen.blit(titleText, (230, 220))
         
         for object in objects:
             if object.screen_mode == "start":
@@ -115,7 +115,7 @@ def start_screen():
 def menu_screen():
     # Handle menu screen
     if screen_mode == "menu":
-        screen.fill((20, 20, 20))
+        screen.fill((255, 51, 51))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -131,14 +131,14 @@ def menu_screen():
 def settings_screen():
     # Handle setting screen
     if screen_mode == "settings":
-        screen.fill((20, 20, 20))
+        screen.fill((255, 51, 51))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
         # draw settings text 
-        settingsText = font.render('Settings', True, (255, 255, 255))
+        settingsText = font.render('Settings', True, (0, 0, 255))
         screen.blit(settingsText, (30, 30))
         
         for object in objects:
@@ -149,12 +149,12 @@ def settings_screen():
         fpsClock.tick(60)
 
 
-customButton = Button(30, 100, 400, 100, 'Play', handleToMenu, False, "start")
-customButton = Button(30, 210, 400, 100, 'Settings', handleToSettings, False, "start")
+customButton = Button(250, 420, 150, 50, 'Play', handleToMenu, False, "start")
+customButton = Button(480, 50, 150, 50, 'Settings', handleToSettings, False, "start")
 
-customButton = Button(30, 30, 400, 100, 'Close', handleToStart, False, "menu")
-customButton = Button(30, 140, 400, 100, 'Host', myFunction, False, "menu")
-customButton = Button(30, 250, 400, 100, 'Join', myFunction, False, "menu")
+customButton = Button(30, 30, 150, 50, 'Close', handleToStart, False, "menu")
+customButton = Button(30, 140, 150, 50, 'Host', myFunction, False, "menu")
+customButton = Button(30, 250, 150, 50, 'Join', myFunction, False, "menu")
 
 customButton = Button(30, 100, 400, 100, 'Close', handleToStart, False, "settings")
 
