@@ -232,10 +232,12 @@ class AbstractCar:
         self.angle = 0
         self.vel = 0
 
-CAR_WIDTH = 20
-CAR_HEIGHT = 50
-RED_CAR = pygame.Surface((CAR_WIDTH, CAR_HEIGHT))
-RED_CAR.fill((255, 0, 0))
+# CAR_WIDTH = 20
+# CAR_HEIGHT = 50
+# RED_CAR = pygame.Surface((CAR_WIDTH, CAR_HEIGHT))
+# RED_CAR.fill((255, 0, 0))
+
+RED_CAR = scale_image(pygame.image.load("./red-car.png"), new_width=20)
 
 class PlayerCar(AbstractCar):
     IMG = RED_CAR

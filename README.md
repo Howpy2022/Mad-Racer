@@ -9,3 +9,8 @@
 2. Route selection functionality
 3. Race game
    
+## References
+
+- Pygamee-Car-Racer by Tim Ruscica
+- FlapPyBird by Sourabh Verma
+- Network-Game-Tutorial by Tech With Tim
