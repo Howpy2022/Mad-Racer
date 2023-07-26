@@ -1,5 +1,5 @@
-# pygame
+pygame
 # pygame-menu 
-pygame-ce 
+# pygame-ce 
 # pygame-menu-ce
 # asyncio
