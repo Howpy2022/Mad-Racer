@@ -140,6 +140,12 @@ def settings_screen():
         # draw settings text 
         settingsText = font.render('Settings', True, (0, 0, 255))
         screen.blit(settingsText, (30, 30))
+
+        settingsText = font.render('Volume', True, (255, 255, 255))
+        screen.blit(settingsText, (10, 180))
+
+        settingsText = font.render('Username', True, (255, 255, 255))
+        screen.blit(settingsText, (10, 280))
         
         for object in objects:
             if object.screen_mode == "settings":
