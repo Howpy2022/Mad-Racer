@@ -1,6 +1,7 @@
-# Imports
 import sys
+
 import pygame
+
 
 # Configuration
 pygame.init()
@@ -11,10 +12,15 @@ screen = pygame.display.set_mode((width, height))
 
 font = pygame.font.SysFont('Arial', 40)
 
+# global list of button objects
 objects = []
+start_objects = [] 
+
+screen_mode = "start" # start, menu, settings, map_sketch, lobby, map_select, game, game_over
+
 
 class Button():
-    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, onePress=False):
+    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, onePress=False, screen_mode=""):
         self.x = x
         self.y = y
         self.width = width
@@ -28,17 +34,23 @@ class Button():
             'pressed': '#333333',
         }
 
+        # overall button surface (i.e. background)
         self.buttonSurface = pygame.Surface((self.width, self.height))
+        # overall button rectangle 
         self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
-
+        
+        # button text surface 
         self.buttonSurf = font.render(buttonText, True, (20, 20, 20))
-
+        # whether button is pressed
         self.alreadyPressed = False
 
+        self.screen_mode = screen_mode
+        
         objects.append(self)
 
     def process(self):
-
+        # TODO: add pos argument (for position of mouse or etc)
+        # process button 
         mousePos = pygame.mouse.get_pos()
         
         self.buttonSurface.fill(self.fillColors['normal'])
@@ -67,26 +79,95 @@ class Button():
 def myFunction():
     print('Button Pressed')
 
-customButton = Button(280, 360, 80, 50, 'Play', myFunction)
-customButton = Button(480, 10, 150, 50, 'Settings', myFunction, True)
+def handleToSettings():
+    global screen_mode
+    screen_mode = "settings"
 
-title_font = pygame.font.SysFont('Arial', 60 )
+def handleToMenu():
+    global screen_mode
+    screen_mode = "menu"
 
-# Game loop.
+def handleToStart():
+    global screen_mode
+    screen_mode = "start"            
+
+def start_screen():
+    # Handle start screen
+    if screen_mode == "start":
+        screen.fill((255, 51, 51))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+        
+        # draw title text 
+        titleText = font.render('Mad Racer', True, (255, 255, 255))
+        screen.blit(titleText, (230, 220))
+        
+        for object in objects:
+            if object.screen_mode == "start":
+                object.process()
+
+        pygame.display.flip()
+        fpsClock.tick(60)
+            
+
+def menu_screen():
+    # Handle menu screen
+    if screen_mode == "menu":
+        screen.fill((255, 51, 51))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        for object in objects:
+            if object.screen_mode == "menu":
+                object.process()
+
+        pygame.display.flip()
+        fpsClock.tick(60)
+    
+def settings_screen():
+    # Handle setting screen
+    if screen_mode == "settings":
+        screen.fill((255, 51, 51))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        # draw settings text 
+        settingsText = font.render('Settings', True, (0, 0, 255))
+        screen.blit(settingsText, (30, 30))
+        
+        for object in objects:
+            if object.screen_mode == "settings":
+                object.process()
+
+        pygame.display.flip()
+        fpsClock.tick(60)
+
+
+customButton = Button(250, 420, 150, 50, 'Play', handleToMenu, False, "start")
+customButton = Button(480, 50, 150, 50, 'Settings', handleToSettings, False, "start")
+
+customButton = Button(30, 30, 150, 50, 'Close', handleToStart, False, "menu")
+customButton = Button(30, 140, 150, 50, 'Host', myFunction, False, "menu")
+customButton = Button(30, 250, 150, 50, 'Join', myFunction, False, "menu")
+
+customButton = Button(30, 100, 400, 100, 'Close', handleToStart, False, "settings")
+
+# Game loop 
 while True:
-    screen.fill((20, 20, 20))
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+    # EVENTS 
+	
+	
+    # DISPLAY 
+            
+    start_screen()
+    menu_screen()
+    settings_screen()
+    
+    
 
-    for object in objects:
-        object.process()
-
-    title_rect = pygame.Rect(120, 80, 360, 60)
-    title_surf = title_font.render("Mad Racer", True, (255, 255, 255))
-
-    screen.blit(title_surf, title_rect)
-
-    pygame.display.flip()
-    fpsClock.tick(fps)

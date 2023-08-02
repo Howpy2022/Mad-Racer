@@ -9,3 +9,13 @@
 2. Route selection functionality
 3. Race game
    
+
+
+## How to run the program
+
+1. Activate the virtual environment 
+source env/bin/activate
+
+2. Run main.py
+python main.py 
+
