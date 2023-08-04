@@ -9,6 +9,13 @@
 2. Route selection functionality
 3. Race game
    
+<<<<<<< HEAD
+## References
+
+- Pygamee-Car-Racer by Tim Ruscica
+- FlapPyBird by Sourabh Verma
+- Network-Game-Tutorial by Tech With Tim
+=======
 
 
 ## How to run the program
@@ -19,3 +26,4 @@ source env/bin/activate
 2. Run main.py
 python main.py 
 
+>>>>>>> 747b06d36c9a3f15bcd3d76e8cd29830e3192db2
