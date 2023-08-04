@@ -18,3 +18,6 @@ deactivate
 
 requirements.txt: list of packages + versions to run the project 
 - pygame 
+
+Pulling from the branch
+git pull origin "branch name"
