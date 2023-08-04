@@ -136,7 +136,7 @@ def handleToGame():
 def start_screen():
     # Handle start screen
     if screen_mode == "start":
-        screen.fill((255, 51, 51))
+        screen.fill((255, 255, 255))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -332,7 +332,9 @@ customButton = Button(30, 30, 150, 50, 'Close', handleToStart, False, "menu")
 customButton = Button(30, 140, 150, 50, 'Host', handleToGame, False, "menu")
 customButton = Button(30, 250, 150, 50, 'Join', myFunction, False, "menu")
 
-customButton = Button(30, 100, 400, 100, 'Close', handleToStart, False, "settings")
+customButton = Button(30, 30, 150, 50, 'Close', handleToStart, False, "settings")
+customButton = Button(30, 80, 150, 50, 'On', handleToStart, False, "settings")
+customButton = Button(30, 80, 150, 50, 'Off', handleToStart, False, "settings")
 
 player_car = PlayerCar(8, 8)
 
