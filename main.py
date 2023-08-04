@@ -48,6 +48,12 @@ start_objects = []
 screen_mode = "start" # start, menu, settings, map_sketch, lobby, map_select, game, game_over
 
 
+background = scale_image(pygame.image.load("./grass2.jpg").convert(), 1280, 960)
+background_location = [0, 0]
+background_rect =  pygame.Rect(0, 0, 1280, 960)
+
+
+
 class Button():
     def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, onePress=False, screen_mode=""):
         self.x = x
@@ -243,11 +249,12 @@ class AbstractCar:
 # RED_CAR = pygame.Surface((CAR_WIDTH, CAR_HEIGHT))
 # RED_CAR.fill((255, 0, 0))
 
-RED_CAR = scale_image(pygame.image.load("./red-car.png"), new_width=20)
+RED_CAR = scale_image(pygame.image.load("./red-car.png").convert_alpha(), new_width=20)
 
 class PlayerCar(AbstractCar):
     IMG = RED_CAR
-    START_POS = (180, 200)
+    # START_POS = (180, 200)
+    START_POS = (width // 2, height // 2)
 
     def reduce_speed(self):
         self.vel = max(self.vel - self.acceleration, 0)
@@ -256,6 +263,16 @@ class PlayerCar(AbstractCar):
     def bounce(self):
         self.vel = -self.vel
         self.move()
+    
+    def move(self):
+        radians = math.radians(self.angle)
+        vertical = math.cos(radians) * self.vel
+        horizontal = math.sin(radians) * self.vel
+
+        background_location[0] += horizontal
+        background_location[1] += vertical
+        # self.y -= vertical
+        # self.x -= horizontal
         
     def process(self, win=None):
         # Handle display
@@ -290,6 +307,11 @@ def game_screen():
     if screen_mode == "game":
         
         screen.fill((20, 20, 20))
+        background_rect = pygame.Rect(background_location[0], background_location[1], 1280, 960)
+        # background_rect =  pygame.Rect(0, 0, 1280, 960)
+
+        screen.blit(background, background_rect)
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
