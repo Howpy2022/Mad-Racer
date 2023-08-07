@@ -180,8 +180,8 @@ def settings_screen():
                 sys.exit()
 
         # draw settings text 
-        settingsText = font.render('Settings', True, (0, 0, 255))
-        screen.blit(settingsText, (200, 30))
+        settingsText = font.render('Settings', True, (255, 255, 255))
+        screen.blit(settingsText, (300, 30))
 
         settingsText = font.render('Volume', True, (255, 255, 255))
         screen.blit(settingsText, (10, 110))
@@ -339,7 +339,7 @@ customButton = Button(10, 140, 150, 50, 'Host', handleToGame, False, "menu")
 customButton = Button(10, 250, 150, 50, 'Join', myFunction, False, "menu")
 
 customButton = Button(10, 30, 150, 50, 'Close', handleToStart, False, "settings")
-customButton = Button(330, 110, 150, 50, 'On', handleToStart, False, "settings")
+customButton = Button(320, 110, 150, 50, 'On', handleToStart, False, "settings")
 customButton = Button(480, 110, 150, 50, 'Off', handleToStart, False, "settings")
 
 player_car = PlayerCar(8, 8)
