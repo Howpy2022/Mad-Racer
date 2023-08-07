@@ -334,7 +334,7 @@ customButton = Button(30, 250, 150, 50, 'Join', myFunction, False, "menu")
 
 customButton = Button(30, 30, 150, 50, 'Close', handleToStart, False, "settings")
 customButton = Button(320, 180, 150, 50, 'On', handleToStart, False, "settings")
-customButton = Button(490, 180, 150, 50, 'Off', handleToStart, False, "settings")
+customButton = Button(480, 180, 150, 50, 'Off', handleToStart, False, "settings")
 
 player_car = PlayerCar(8, 8)
 
