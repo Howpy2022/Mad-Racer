@@ -335,8 +335,8 @@ customButton = Button(250, 420, 150, 50, 'Play', handleToMenu, False, "start")
 customButton = Button(480, 50, 150, 50, 'Settings', handleToSettings, False, "start")
 
 customButton = Button(10, 30, 150, 50, 'Close', handleToStart, False, "menu")
-customButton = Button(10, 140, 150, 50, 'Host', handleToGame, False, "menu")
-customButton = Button(10, 250, 150, 50, 'Join', myFunction, False, "menu")
+customButton = Button(250, 140, 150, 50, 'Host', handleToGame, False, "menu")
+customButton = Button(250, 250, 150, 50, 'Join', myFunction, False, "menu")
 
 customButton = Button(10, 30, 150, 50, 'Close', handleToStart, False, "settings")
 customButton = Button(320, 110, 150, 50, 'On', handleToStart, False, "settings")
