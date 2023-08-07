@@ -181,7 +181,7 @@ def settings_screen():
 
         # draw settings text 
         settingsText = font.render('Settings', True, (255, 255, 255))
-        screen.blit(settingsText, (300, 30))
+        screen.blit(settingsText, (270, 30))
 
         settingsText = font.render('Volume', True, (255, 255, 255))
         screen.blit(settingsText, (10, 110))
