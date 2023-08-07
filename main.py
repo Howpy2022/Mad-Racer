@@ -184,16 +184,16 @@ def settings_screen():
         screen.blit(settingsText, (30, 30))
 
         settingsText = font.render('Volume', True, (255, 255, 255))
-        screen.blit(settingsText, (10, 180))
+        screen.blit(settingsText, (10, 110))
 
         settingsText = font.render('Username', True, (255, 255, 255))
-        screen.blit(settingsText, (10, 280))
+        screen.blit(settingsText, (10, 160))
 
         settingsText = font.render('Screen Resolution', True, (255, 255, 255))
-        screen.blit(settingsText, (10, 380))
+        screen.blit(settingsText, (10, 210))
 
         settingsText = font.render('Keymap', True, (255, 255, 255))
-        screen.blit(settingsText, (10, 480))
+        screen.blit(settingsText, (10, 260))
         
         for object in objects:
             if object.screen_mode == "settings":
