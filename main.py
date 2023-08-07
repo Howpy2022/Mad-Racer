@@ -136,7 +136,7 @@ def handleToGame():
 def start_screen():
     # Handle start screen
     if screen_mode == "start":
-        screen.fill((255, 255, 255))
+        screen.fill((255, 0, 0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
