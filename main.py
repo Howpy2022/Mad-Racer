@@ -181,7 +181,7 @@ def settings_screen():
 
         # draw settings text 
         settingsText = font.render('Settings', True, (0, 0, 255))
-        screen.blit(settingsText, (100, 30))
+        screen.blit(settingsText, (200, 30))
 
         settingsText = font.render('Volume', True, (255, 255, 255))
         screen.blit(settingsText, (10, 110))
@@ -334,11 +334,11 @@ def game_screen():
 customButton = Button(250, 420, 150, 50, 'Play', handleToMenu, False, "start")
 customButton = Button(480, 50, 150, 50, 'Settings', handleToSettings, False, "start")
 
-customButton = Button(30, 30, 150, 50, 'Close', handleToStart, False, "menu")
-customButton = Button(30, 140, 150, 50, 'Host', handleToGame, False, "menu")
-customButton = Button(30, 250, 150, 50, 'Join', myFunction, False, "menu")
+customButton = Button(10, 30, 150, 50, 'Close', handleToStart, False, "menu")
+customButton = Button(10, 140, 150, 50, 'Host', handleToGame, False, "menu")
+customButton = Button(10, 250, 150, 50, 'Join', myFunction, False, "menu")
 
-customButton = Button(30, 30, 150, 50, 'Close', handleToStart, False, "settings")
+customButton = Button(10, 30, 150, 50, 'Close', handleToStart, False, "settings")
 customButton = Button(330, 110, 150, 50, 'On', handleToStart, False, "settings")
 customButton = Button(480, 110, 150, 50, 'Off', handleToStart, False, "settings")
 
