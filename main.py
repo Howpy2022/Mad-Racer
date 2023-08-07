@@ -188,6 +188,12 @@ def settings_screen():
 
         settingsText = font.render('Username', True, (255, 255, 255))
         screen.blit(settingsText, (10, 280))
+
+        settingsText = font.render('Screen Resolution', True, (255, 255, 255))
+        screen.blit(settingsText, (10, 380))
+
+        settingsText = font.render('Keymap', True, (255, 255, 255))
+        screen.blit(settingsText, (10, 480))
         
         for object in objects:
             if object.screen_mode == "settings":
