@@ -181,19 +181,19 @@ def settings_screen():
 
         # draw settings text 
         settingsText = font.render('Settings', True, (0, 0, 255))
-        screen.blit(settingsText, (30, 30))
+        screen.blit(settingsText, (100, 30))
 
         settingsText = font.render('Volume', True, (255, 255, 255))
         screen.blit(settingsText, (10, 110))
 
         settingsText = font.render('Username', True, (255, 255, 255))
-        screen.blit(settingsText, (10, 160))
+        screen.blit(settingsText, (10, 180))
 
         settingsText = font.render('Screen Resolution', True, (255, 255, 255))
-        screen.blit(settingsText, (10, 210))
+        screen.blit(settingsText, (10, 250))
 
         settingsText = font.render('Keymap', True, (255, 255, 255))
-        screen.blit(settingsText, (10, 260))
+        screen.blit(settingsText, (10, 320))
         
         for object in objects:
             if object.screen_mode == "settings":
@@ -339,8 +339,8 @@ customButton = Button(30, 140, 150, 50, 'Host', handleToGame, False, "menu")
 customButton = Button(30, 250, 150, 50, 'Join', myFunction, False, "menu")
 
 customButton = Button(30, 30, 150, 50, 'Close', handleToStart, False, "settings")
-customButton = Button(330, 180, 150, 50, 'On', handleToStart, False, "settings")
-customButton = Button(485, 180, 150, 50, 'Off', handleToStart, False, "settings")
+customButton = Button(330, 110, 150, 50, 'On', handleToStart, False, "settings")
+customButton = Button(480, 110, 150, 50, 'Off', handleToStart, False, "settings")
 
 player_car = PlayerCar(8, 8)
 
