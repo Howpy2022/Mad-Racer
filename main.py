@@ -4,7 +4,7 @@ import math
 import pygame
 
 # Utils 
-def scale_image(img, new_width=None, new_height=None):
+def scale_image(img, new_width = None, new_height = None):
     # Scales the pygame img to (new_width, new_height)
     # At least one of new_width, new_height must be given
     # If only one is given, the other is scaled to maintain aspect ratio
@@ -27,7 +27,7 @@ def draw_image(win, img, top_left, angle):
     # Draws the image with top_left positioning and angle rotation about the center 
     rot_img = pygame.transform.rotate(img, angle)
     new_rect = rot_img.get_rect(
-        center=img.get_rect(topleft=top_left).center)
+        center = img.get_rect(topleft = top_left).center)
     win.blit(rot_img, new_rect.topleft)
 
 
@@ -55,7 +55,7 @@ background_rect =  pygame.Rect(0, 0, 1280, 960)
 
 
 class Button():
-    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, onePress=False, screen_mode=""):
+    def __init__(self, x, y, width, height, buttonText = 'Button', onclickFunction = None, onePress = False, screen_mode = ""):
         self.x = x
         self.y = y
         self.width = width
@@ -92,7 +92,7 @@ class Button():
         if self.buttonRect.collidepoint(mousePos):
             self.buttonSurface.fill(self.fillColors['hover'])
 
-            if pygame.mouse.get_pressed(num_buttons=3)[0]:
+            if pygame.mouse.get_pressed(num_buttons = 3)[0]:
                 self.buttonSurface.fill(self.fillColors['pressed'])
 
                 if self.onePress:
@@ -106,8 +106,8 @@ class Button():
                 self.alreadyPressed = False
 
         self.buttonSurface.blit(self.buttonSurf, [
-            self.buttonRect.width/2 - self.buttonSurf.get_rect().width/2,
-            self.buttonRect.height/2 - self.buttonSurf.get_rect().height/2
+            self.buttonRect.width / 2 - self.buttonSurf.get_rect().width / 2,
+            self.buttonRect.height / 2 - self.buttonSurf.get_rect().height / 2
         ])
         screen.blit(self.buttonSurface, self.buttonRect)
 
@@ -213,7 +213,7 @@ class AbstractCar:
         self.x, self.y = self.START_POS
         self.acceleration = 0.1
 
-    def rotate(self, left=False, right=False):
+    def rotate(self, left = False, right = False):
         if left:
             self.angle += self.rotation_vel
         elif right:
@@ -227,7 +227,7 @@ class AbstractCar:
         self.move()
 
     def move_backward(self):
-        self.vel = max(self.vel - self.acceleration, -self.max_vel/2)
+        self.vel = max(self.vel - self.acceleration, -self.max_vel / 2)
         self.move()
 
     def move(self):
@@ -238,7 +238,7 @@ class AbstractCar:
         self.y -= vertical
         self.x -= horizontal
 
-    def collide(self, mask, x=0, y=0):
+    def collide(self, mask, x = 0, y = 0):
         # TODO: decelerate instead?
         car_mask = pygame.mask.from_surface(self.img)
         offset = (int(self.x - x), int(self.y - y))
@@ -255,7 +255,7 @@ class AbstractCar:
 # RED_CAR = pygame.Surface((CAR_WIDTH, CAR_HEIGHT))
 # RED_CAR.fill((255, 0, 0))
 
-RED_CAR = scale_image(pygame.image.load("./red-car.png").convert_alpha(), new_width=20)
+RED_CAR = scale_image(pygame.image.load("./red-car.png").convert_alpha(), new_width = 20)
 
 class PlayerCar(AbstractCar):
     IMG = RED_CAR
@@ -280,7 +280,7 @@ class PlayerCar(AbstractCar):
         # self.y -= vertical
         # self.x -= horizontal
         
-    def process(self, win=None):
+    def process(self, win = None):
         # Handle display
         if win is None:
                 self.draw(screen)
@@ -292,9 +292,9 @@ class PlayerCar(AbstractCar):
         moved = False
 
         if keys[pygame.K_a]:
-            self.rotate(left=True)
+            self.rotate(left = True)
         if keys[pygame.K_d]:
-            self.rotate(right=True)
+            self.rotate(right = True)
         if keys[pygame.K_w]:
             moved = True
             self.move_forward()
