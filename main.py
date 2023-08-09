@@ -1,5 +1,5 @@
 import sys
-import math 
+import math
 
 import pygame
 
@@ -87,7 +87,7 @@ class Button():
         # TODO: add pos argument (for position of mouse or etc)
         # process button 
         mousePos = pygame.mouse.get_pos()
-        
+
         self.buttonSurface.fill(self.fillColors['normal'])
         if self.buttonRect.collidepoint(mousePos):
             self.buttonSurface.fill(self.fillColors['hover'])
@@ -332,13 +332,13 @@ def game_screen():
         
 
 customButton = Button(250, 420, 150, 50, 'Play', handleToMenu, False, "start")
-customButton = Button(480, 50, 150, 50, 'Settings', handleToSettings, False, "start")
+customButton = Button(480, 30, 150, 50, 'Settings', handleToSettings, False, "start")
 
-customButton = Button(10, 30, 150, 50, 'Close', handleToStart, False, "menu")
+customButton = Button(480, 30, 150, 50, 'Close', handleToStart, False, "menu")
 customButton = Button(250, 140, 150, 50, 'Host', handleToGame, False, "menu")
 customButton = Button(250, 250, 150, 50, 'Join', myFunction, False, "menu")
 
-customButton = Button(10, 30, 150, 50, 'Close', handleToStart, False, "settings")
+customButton = Button(480, 30, 150, 50, 'Close', handleToStart, False, "settings")
 customButton = Button(320, 110, 150, 50, 'On', handleToStart, False, "settings")
 customButton = Button(480, 110, 150, 50, 'Off', handleToStart, False, "settings")
 
