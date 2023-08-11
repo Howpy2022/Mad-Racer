@@ -3,7 +3,7 @@ import math
 
 import pygame
 
-# Utils 
+# Utils
 def scale_image(img, new_width = None, new_height = None):
     # Scales the pygame img to (new_width, new_height)
     # At least one of new_width, new_height must be given
@@ -33,12 +33,15 @@ def draw_image(win, img, top_left, angle):
 
 
 # Configuration
+# initializes all imported pygame modules
 pygame.init()
 fps = 60
+# creates an object to keep track of time
 fpsClock = pygame.time.Clock()
 width, height = 640, 480
+# initializes a window or screen for display
 screen = pygame.display.set_mode((width, height))
-
+# creates a font object from the list of fonts from the computer system
 font = pygame.font.SysFont('Arial', 40)
 
 # global list of button objects
@@ -47,9 +50,10 @@ start_objects = []
 
 screen_mode = "start" # start, menu, settings, map_sketch, lobby, map_select, game, game_over
 
-
+# loads a new in image from a file or a file-like object
 background = scale_image(pygame.image.load("./grass2.jpg").convert(), 1280, 960)
 background_location = [0, 0]
+# gives coordinates for a rectangular object
 background_rect =  pygame.Rect(0, 0, 1280, 960)
 
 
@@ -69,13 +73,15 @@ class Button():
             'pressed': '#333333',
         }
 
-        # overall button surface (i.e. background)
+        # overall button surface (i.e. background); represents images
         self.buttonSurface = pygame.Surface((self.width, self.height))
-        # overall button rectangle 
+        
+        # overall button rectangle; gives rectangular coordinates for a rectangular object 
         self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
         
-        # button text surface 
+        # button text surface; draws a text on a new surface
         self.buttonSurf = font.render(buttonText, True, (20, 20, 20))
+       
         # whether button is pressed
         self.alreadyPressed = False
 
@@ -119,6 +125,7 @@ class Button():
             self.buttonRect.width / 2 - self.buttonSurf.get_rect().width / 2,
             self.buttonRect.height / 2 - self.buttonSurf.get_rect().height / 2
         ])
+        # draws one image onto another
         screen.blit(self.buttonSurface, self.buttonRect)
 
 def myFunction():
