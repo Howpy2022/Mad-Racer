@@ -191,8 +191,10 @@ def settings_screen():
     # Handle setting screen
     if screen_mode == "settings":
         screen.fill((255, 51, 51))
+        # gets events for the queue
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                # unitinitalizes all pygame modules
                 pygame.quit()
                 sys.exit()
 
@@ -215,8 +217,9 @@ def settings_screen():
         for object in objects:
             if object.screen_mode == "settings":
                 object.process()
-
+        # updates the full display Surface to the screen
         pygame.display.flip()
+        # gives out the clock time in frames per second
         fpsClock.tick(60)
 
 
