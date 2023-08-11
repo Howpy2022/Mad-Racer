@@ -109,12 +109,12 @@ class Button():
                 
                 # detects if the mouse button is pressed once
                 if self.onePress:
-                    # goes on to the designated page when clicked
+                    # runs a predefined function when button is clicked --> (i.e. change to designated page)
                     self.onclickFunction()
 
                 # in case if the mouse button has not been pressed
                 elif not self.alreadyPressed:
-                    # goes on to the designated page when clicked
+                    # runs a predefined function when button is clicked --> (i.e. change to designated page)
                     self.onclickFunction()
                     self.alreadyPressed = True
 
