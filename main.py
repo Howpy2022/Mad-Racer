@@ -85,26 +85,36 @@ class Button():
 
     def process(self):
         # TODO: add pos argument (for position of mouse or etc)
-        # process button 
+        # process button
+        # checks the positioning of the mouse's pointer 
         mousePos = pygame.mouse.get_pos()
 
+        # fills surface with specified color
         self.buttonSurface.fill(self.fillColors['normal'])
+        # detects if the pointer is on top of the button
         if self.buttonRect.collidepoint(mousePos):
+            # fills surface with specified color when on the button
             self.buttonSurface.fill(self.fillColors['hover'])
 
+            # detects if the button is pressed by pushing the mouse down 
             if pygame.mouse.get_pressed(num_buttons = 3)[0]:
+                # fills surface with specified color when pressed
                 self.buttonSurface.fill(self.fillColors['pressed'])
-
+                
+                # detects if the mouse button is pressed once
                 if self.onePress:
+                    # goes on to the designated page when clicked
                     self.onclickFunction()
 
+                # in case if the mouse button has not been pressed
                 elif not self.alreadyPressed:
+                    # goes on to the designated page when clicked
                     self.onclickFunction()
                     self.alreadyPressed = True
 
             else:
                 self.alreadyPressed = False
-
+        # draws one image onto another
         self.buttonSurface.blit(self.buttonSurf, [
             self.buttonRect.width / 2 - self.buttonSurf.get_rect().width / 2,
             self.buttonRect.height / 2 - self.buttonSurf.get_rect().height / 2
