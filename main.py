@@ -249,20 +249,6 @@ class Maps(pygame.sprite.Sprite):
                     [2, 3, 1, 3, 1, 1, 3, 1, 1, 2]
         ]
 
-        map_1_rot = [
-                    [1, 1, 0, 1, 1, 0, 1, 1, 1, 3],
-                    [0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
-                    [0, 1, 2, 1, 0, 2, 1, 2, 0, 0],
-                    [1, 1, 0, 1, 3, 0, 0, 0, 0, 0],
-                    [1, 0, 0, 0, 0, 0, 1, 1, 0, 3],
-                    [0, 2, 0, 1, 0, 0, 0, 3, 0, 0],
-                    [0, 0, 0, 1, 3, 0, 0, 1, 3, 0],
-                    [0, 1, 0, 1, 0, 2, 0, 0, 3, 0],
-                    [0, 0, 2, 1, 3, 0, 0, 2, 1, 3],
-                    [2, 2, 1, 2, 1, 1, 2, 1, 1, 3]
-        ]
-
-        
         pygame.sprite.Sprite.__init__(self)
         self.image = map_files[tile_map]
         self.rect = self.image.get_rect()
@@ -275,6 +261,7 @@ class Maps(pygame.sprite.Sprite):
 
     def update(self, cam_x, cam_y):
         self.rect.topleft = self.x - cam_x, self.y - cam_y
+        
 class AbstractCar:
     def __init__(self, max_vel, rotation_vel):
         self.img = self.IMG
