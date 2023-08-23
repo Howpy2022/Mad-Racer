@@ -342,12 +342,13 @@ class PlayerCar(AbstractCar):
         # self.y -= vertical
         # self.x -= horizontal
         
-    def process(self, win = None):
+    def process(self, win = None, draw=False):
         # Handle display
-        if win is None:
-                self.draw(screen)
-        else:
-            self.draw(win)
+        if draw:
+            if win is None:
+                    self.draw(screen)
+            else:
+                self.draw(win)
             
         # Handle movement
         keys = pygame.key.get_pressed()
@@ -395,9 +396,17 @@ def game_screen():
         player_y = player_car.y - background_location[1]
         player2_x, player2_y = parse_data(send_data(network.id, player_x, player_y))
         # set player car 2 x, y relative to current background (absolute position -> relative)
+        # player_car2.x = player2_x + background_location[0]
+        # player_car2.y = player2_y + background_location[1]
+        
+        print("player2 net: ", player2_x, ", ", player2_y)
         player_car2.x = player2_x + background_location[0]
         player_car2.y = player2_y + background_location[1]
-        
+
+        print("Player 1: ", player_car.x, ", ", player_car.y)        
+        print("Player 2: ", player_car2.x, ", ", player_car2.y)
+
+        player_car.draw(screen)
         player_car2.draw(screen)
         
         pygame.display.flip()
@@ -417,8 +426,8 @@ customButton = Button(480, 30, 150, 50, 'Close', handleToStart, False, "settings
 customButton = Button(320, 110, 150, 50, 'On', handleToStart, False, "settings")
 customButton = Button(480, 110, 150, 50, 'Off', handleToStart, False, "settings")
 
-player_car = PlayerCar(50, 50)
-player_car2 = PlayerCar(100, 100)
+player_car = PlayerCar(8, 8)
+player_car2 = PlayerCar(8, 8)
 player_car2.img = GREY_CAR
 network = Network()
 
