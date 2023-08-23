@@ -387,26 +387,20 @@ def game_screen():
                 pygame.quit()
                 sys.exit()
         
-        player_car.process()
-        
+        player_car.process(draw=True)
         
         # send network stuff
         # calculate player car x, y relative to background (absolute position)
         player_x = player_car.x - background_location[0]
         player_y = player_car.y - background_location[1]
-        player2_x, player2_y = parse_data(send_data(network.id, player_x, player_y))
-        # set player car 2 x, y relative to current background (absolute position -> relative)
-        # player_car2.x = player2_x + background_location[0]
-        # player_car2.y = player2_y + background_location[1]
+        player2_x, player2_y, player2_angle = parse_data(send_data(player_x, player_y, player_car.angle))
         
-        print("player2 net: ", player2_x, ", ", player2_y)
+        # set player car 2 x, y relative to current background (absolute position -> relative)
         player_car2.x = player2_x + background_location[0]
         player_car2.y = player2_y + background_location[1]
-
-        print("Player 1: ", player_car.x, ", ", player_car.y)        
-        print("Player 2: ", player_car2.x, ", ", player_car2.y)
-
-        player_car.draw(screen)
+        player_car2.angle = player2_angle
+        
+        # player_car.draw(screen)
         player_car2.draw(screen)
         
         pygame.display.flip()
@@ -429,19 +423,23 @@ customButton = Button(480, 110, 150, 50, 'Off', handleToStart, False, "settings"
 player_car = PlayerCar(8, 8)
 player_car2 = PlayerCar(8, 8)
 player_car2.img = GREY_CAR
+
 network = Network()
 
-def send_data(id, x, y):
-    data = str(id) + ":" + str(x) + "," + str(y)
+def send_data(x, y, angle):
+    global network 
+    
+    data = f"{network.id}:{x},{y},{angle}"
     reply = network.send(data)
+    
     return reply 
 
 def parse_data(data):
     try:
         d = data.split(":")[1].split(",")
-        return int(d[0]), int(d[1])
-    except:
-        return 0,0
+        return float(d[0]), float(d[1]), float(d[2])
+    except:    
+        return 0,0,0
     
 
 # Game loop 
