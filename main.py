@@ -2,6 +2,8 @@ import os
 import sys
 import math
 
+from network import Network
+
 import pygame
 
 # Utils
@@ -315,6 +317,7 @@ class AbstractCar:
 # RED_CAR.fill((255, 0, 0))
 
 RED_CAR = scale_image(pygame.image.load("./red-car.png").convert_alpha(), new_width = 20)
+GREY_CAR = scale_image(pygame.image.load("./grey-car.png").convert_alpha(), new_width = 20)
 
 class PlayerCar(AbstractCar):
     IMG = RED_CAR
@@ -374,8 +377,9 @@ def game_screen():
         screen.fill((20, 20, 20))
         background_rect = pygame.Rect(background_location[0], background_location[1], 1280, 960)
         # background_rect =  pygame.Rect(0, 0, 1280, 960)
-
+        
         screen.blit(background, background_rect)
+        
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -383,7 +387,19 @@ def game_screen():
                 sys.exit()
         
         player_car.process()
-
+        
+        
+        # send network stuff
+        # calculate player car x, y relative to background (absolute position)
+        player_x = player_car.x - background_location[0]
+        player_y = player_car.y - background_location[1]
+        player2_x, player2_y = parse_data(send_data(network.id, player_x, player_y))
+        # set player car 2 x, y relative to current background (absolute position -> relative)
+        player_car2.x = player2_x + background_location[0]
+        player_car2.y = player2_y + background_location[1]
+        
+        player_car2.draw(screen)
+        
         pygame.display.flip()
         fpsClock.tick(60)
         
@@ -401,8 +417,23 @@ customButton = Button(480, 30, 150, 50, 'Close', handleToStart, False, "settings
 customButton = Button(320, 110, 150, 50, 'On', handleToStart, False, "settings")
 customButton = Button(480, 110, 150, 50, 'Off', handleToStart, False, "settings")
 
-player_car = PlayerCar(8, 8)
+player_car = PlayerCar(50, 50)
+player_car2 = PlayerCar(100, 100)
+player_car2.img = GREY_CAR
+network = Network()
 
+def send_data(id, x, y):
+    data = str(id) + ":" + str(x) + "," + str(y)
+    reply = network.send(data)
+    return reply 
+
+def parse_data(data):
+    try:
+        d = data.split(":")[1].split(",")
+        return int(d[0]), int(d[1])
+    except:
+        return 0,0
+    
 
 # Game loop 
 while True:
