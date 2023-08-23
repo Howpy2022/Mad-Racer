@@ -54,7 +54,8 @@ start_objects = []
 screen_mode = "start" # start, menu, settings, map_sketch, lobby, map_select, game, game_over
 
 # loads a new in image from a file or a file-like object
-background = scale_image(pygame.image.load("./grass2.jpg").convert(), 1280, 960)
+background = scale_image(pygame.image.load("./imgs/grass2.jpg").convert(), 1280, 960)
+
 background_location = [0, 0]
 # gives coordinates for a rectangular object
 background_rect =  pygame.Rect(0, 0, 1280, 960)
@@ -316,8 +317,9 @@ class AbstractCar:
 # RED_CAR = pygame.Surface((CAR_WIDTH, CAR_HEIGHT))
 # RED_CAR.fill((255, 0, 0))
 
-RED_CAR = scale_image(pygame.image.load("./red-car.png").convert_alpha(), new_width = 20)
-GREY_CAR = scale_image(pygame.image.load("./grey-car.png").convert_alpha(), new_width = 20)
+RED_CAR = scale_image(pygame.image.load("./imgs/red-car.png").convert_alpha(), new_width = 20)
+GREY_CAR = scale_image(pygame.image.load("./imgs/grey-car.png").convert_alpha(), new_width = 20)
+
 
 class PlayerCar(AbstractCar):
     IMG = RED_CAR
